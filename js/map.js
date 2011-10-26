@@ -8,7 +8,10 @@ var map = po.map()
   .add(po.interact());
 
 map.add(po.image()
-  .url("http://s3.amazonaws.com/com.modestmaps.bluemarble/{Z}-r{Y}-c{X}.jpg"));
+  .url(po.url("http://{S}tile.cloudmade.com"
+    + "/53a8593b4c2c403bae8d88f842dbb3b3" // http://cloudmade.com/register
+    + "/998/256/{Z}/{X}/{Y}.png")
+  .hosts(["a.", "b.", "c.", ""])));
 
 map.add(po.geoJson()
   .url("../data/world.json")
