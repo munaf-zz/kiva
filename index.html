@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+<head>
+  <title>Kiva Data Explorer</title>
+  <link rel="stylesheet" type="text/css" href="css/lib/bootstrap.css" />
+  <!--<link rel="stylesheet" type="text/css" href="css/style.css" />-->
+  <script type="text/javascript" src="js/lib/jquery.min.js"></script>
+  <script type="text/javascript" src="js/lib/underscore.min.js"></script>
+  <script type="text/javascript" src="js/lib/d3.js"></script>
+  <script type="text/javascript" src="js/lib/polymaps.min.js"></script>
+  <style type="text/css">
+    html, body {
+      background-color: #eee;
+    }
+    body {
+      padding-top: 60px;
+    }
+    .content {
+      padding-left: 30px;
+      max-height: 400px;
+    }
+    .compass .fore, .compass .chevron {
+      stroke: #666;
+    }
+    .layer path {
+      fill: #ccc;
+      fill-opacity: .85;
+      stroke: #012;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="topbar">
+    <div class="topbar-inner">
+      <div class="container-fluid">
+        <span class="brand">Kiva Data Explorer</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid">
+    <div class="sidebar">
+      <div class="alert-message block-message success">
+        <h5>Lending Partner</h5>
+      </div>
+      <div class="alert-message block-message success">
+        <h5>Loan Range</h5>
+      </div>
+      <div class="alert-message block-message success">
+        <h5>Business Sector</h5>
+      </div>
+    </div>
+
+    <div class="content">
+      <div class="row">
+        <div id="map"></div>
+      </div>
+      <div class="row">
+        <div id="timeline">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript" src="js/map.js"></script>
+</body>
+</html>
