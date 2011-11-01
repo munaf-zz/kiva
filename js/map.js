@@ -13,10 +13,10 @@ map.add(po.image()
     + "/998/256/{Z}/{X}/{Y}.png")
   .hosts(["a.", "b.", "c.", ""])));
 
-map.add(po.geoJson()
+/*map.add(po.geoJson()
   .url("../data/world.json")
   .tile(false)
-  .zoom(3));
+  .zoom(3));*/
 
 map.add(po.compass()
   .pan("none"));

@@ -21,6 +21,13 @@
       padding-left: 30px;
       max-height: 400px;
     }
+    div#map {
+      height: 500px;
+    }
+    div#context {
+      width: 700px;
+      height: 100px;
+    }
     .compass .back{
       fill:#eee;
       fill-opacity:.8;
@@ -77,43 +84,44 @@
     .topbar-inner img {
       height: 40px;
     }
+    .context-area {
+      cursor: crosshair;
+    }
   </style>
 </head>
 <body>
 
   <div class="topbar">
-    <div class="topbar-inner">
-      <div class="container-fluid">
-        <img src="img/kiva-logo.png" />
+    <div class="fill">
+      <div class="container">
+        <h2>Kiva Data Explorer</h2>
       </div>
     </div>
   </div>
 
-  <div class="container-fluid">
-    <div class="sidebar">
-      <div class="alert-message block-message success">
-        <h5>Lending Partner</h5>
-        <div class="input">
-          <select class="chzn-select medium" name="sel-partner" id="sel-partner">
-            <option>First</option>
-            <option>Second</option>
-          </select>
-        </div>
-      </div>
-      <div class="alert-message block-message success">
-        <h5>Loan Range</h5>
-      </div>
-      <div class="alert-message block-message success">
-        <h5>Business Sector</h5>
-      </div>
-    </div>
-
+  <div class="container">
     <div class="content">
       <div class="row">
-        <div id="map"></div>
-      </div>
-      <div class="row">
-        <div id="timeline">
+        <div class="span3">
+          <div class="alert-message block-message success">
+            <h5>Lending Partner</h5>
+            <div class="input">
+              <select class="chzn-select medium" name="sel-partner" id="sel-partner">
+                <option>First</option>
+                <option>Second</option>
+              </select>
+            </div>
+          </div>
+          <div class="alert-message block-message success">
+            <h5>Loan Range</h5>
+          </div>
+          <div class="alert-message block-message success">
+            <h5>Business Sector</h5>
+          </div>
+        </div>
+        <div class="span12">
+          <div id="map"></div>
+          <div id="context"></div>
         </div>
       </div>
     </div>
@@ -121,7 +129,7 @@
 
   <script type="text/javascript" src="js/ui.js"></script>
   <script type="text/javascript" src="js/map.js"></script>
-
+  <script type="text/javascript" src="js/context.js"></script>
   <script type="text/javascript">
 
   var _gaq = _gaq || [];
