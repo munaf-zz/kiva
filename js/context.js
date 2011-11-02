@@ -134,7 +134,7 @@ function moveTimeWindow() {
     Math.min(x, vizWidth-timefilter.attr("width"))));
   indexRange = [Math.round(timefilter.attr("x") / barWidth), 
 		Math.round((timefilter.attr("x") / barWidth)+ numBarsSel)];	
-	//console.log("%s to %s", LOANS_OVER_TIME.months[indexRange[0]], LOANS_OVER_TIME.months[indexRange[1]]);
+  filterByDate(KIVA['months'][indexRange[0]], KIVA['months'][indexRange[1]], KIVA['loans']);
 }
 
 // Let go of time window. Enable drawing new time windows. 
@@ -145,4 +145,5 @@ function releaseTimeWindow() {
   timefilter.on("mouseout", null);
   context.on("mousedown", startTimeSelect);
   context.on("mouseup", stopTimeSelect);
+//  filterByDate(KIVA['months'][indexRange[0]], KIVA['months'][indexRange[1]], CURDATA);
 }

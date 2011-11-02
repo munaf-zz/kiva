@@ -1,3 +1,6 @@
+var MAPELEMENT;
+var CURDATA;
+
 function sumArray(arr) {
   return _(arr).reduce(function(memo, num) { return (memo+num); }, 0);
 }
@@ -10,11 +13,20 @@ function equalCountry(country, key) {
   return KIVA['countries'][parseInt(key)] == country;
 }
 
+function filterByDate(start, end, data) {
+  var months = _(KIVA['months']).clone();
+  months = months.slice(
+    _(months).indexOf(start), _(months).indexOf(end)+1
+  );
+  CURDATA = {};
+  _(months).each(function(month) { 
+    CURDATA[month] = data[month]; 
+  });
+  MAPELEMENT.reshow();
+}
+
 function successByCountry(country, data) {
-  var output = {};
   var success = [];
-  output['c'] = country;
-  output['%'] = null;
   _(data).each(function(date_filt, date_key, date_list) {
     _(date_filt).each(function(pid_filt, pid_key, pid_list) {
       _(pid_filt).each(function(loc_filt, loc_key, loc_list) {
@@ -28,8 +40,7 @@ function successByCountry(country, data) {
       });
     });
   });
-  output['%'] = successRate(success);
-  return output;
+  return successRate(success);
 }
 
 var po = org.polymaps;
@@ -47,27 +58,34 @@ map.add(po.image()
     + "/998/256/{Z}/{X}/{Y}.png")
   .hosts(["a.", "b.", "c.", ""])));
 
-map.add(po.geoJson()
+map.add(MAPELEMENT = po.geoJson()
   .url("../data/world.json")
   .tile(false)
   .zoom(3)
-  .on("load", initMap));
+  .on("load", initMap)
+  .on("show", renderMap));
 
+  console.log(MAPELEMENT);
 map.add(po.compass()
   .pan("none"));
 
 map.container().setAttribute("class", "YlOrRd");
 
 function initMap(e) {
+  CURDATA = KIVA['loans'];
+  MAPELEMENT.reshow();
+}
+
+function renderMap(e) {
   for (var i = 0; i < e.features.length; i++) {
     var feature = e.features[i],
         n = feature.data.properties.name,
-        v = successByCountry(n, KIVA['loans'])['%'];
+        v = successByCountry(n, CURDATA);
     n$(feature.element)
-        .attr("class", isNaN(v) ? null : "q" + ~~(v * 9) + "-" + 9)
+      .attr("class", isNaN(v) ? null : "q" + ~~(v * 9) + "-" + 9)
       .add("svg:title")
         .text(n + (isNaN(v) ? "" : ":  " + formatPercent(v)));
-  }
+  } 
 }
 
 function formatPercent(p) {
