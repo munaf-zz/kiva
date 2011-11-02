@@ -1,3 +1,37 @@
+function sumArray(arr) {
+  return _(arr).reduce(function(memo, num) { return (memo+num); }, 0);
+}
+
+function successRate(arr) {
+  return sumArray(arr) / arr.length;
+}
+
+function equalCountry(country, key) {
+  return KIVA['countries'][parseInt(key)] == country;
+}
+
+function successByCountry(country, data) {
+  var output = {};
+  var success = [];
+  output['c'] = country;
+  output['%'] = null;
+  _(data).each(function(date_filt, date_key, date_list) {
+    _(date_filt).each(function(pid_filt, pid_key, pid_list) {
+      _(pid_filt).each(function(loc_filt, loc_key, loc_list) {
+        if (equalCountry(country, loc_key)) {
+          _(loc_filt).each(function(sect_filt, sect_key, sect_list) {
+            _(sect_filt).each(function(obj_filt, obj_key, obj_list) {
+              success.push(obj_filt['s']);
+            });
+          });
+        }
+      });
+    });
+  });
+  output['%'] = successRate(success);
+  return output;
+}
+
 var po = org.polymaps;
 
 var map = po.map()
@@ -13,12 +47,31 @@ map.add(po.image()
     + "/998/256/{Z}/{X}/{Y}.png")
   .hosts(["a.", "b.", "c.", ""])));
 
-/*map.add(po.geoJson()
+map.add(po.geoJson()
   .url("../data/world.json")
   .tile(false)
-  .zoom(3));*/
+  .zoom(3)
+  .on("load", initMap));
 
 map.add(po.compass()
   .pan("none"));
 
 map.container().setAttribute("class", "YlOrRd");
+
+function initMap(e) {
+  for (var i = 0; i < e.features.length; i++) {
+    var feature = e.features[i],
+        n = feature.data.properties.name,
+        v = successByCountry(n, KIVA['loans'])['%'];
+    n$(feature.element)
+        .attr("class", isNaN(v) ? null : "q" + ~~(v * 9) + "-" + 9)
+      .add("svg:title")
+        .text(n + (isNaN(v) ? "" : ":  " + formatPercent(v)));
+  }
+}
+
+function formatPercent(p) {
+  return (p * 100).toPrecision(Math.min(2, 2 - Math.log(p) / Math.LN2)) + "%";
+}
+
+
