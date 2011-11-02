@@ -59,7 +59,7 @@ map.add(po.image()
   .hosts(["a.", "b.", "c.", ""])));
 
 map.add(MAPELEMENT = po.geoJson()
-  .url("data/world.json")
+  .url("http://munaf.github.com/kiva/data/world.json")
   .tile(false)
   .zoom(3)
   .on("load", initMap)
