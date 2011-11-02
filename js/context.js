@@ -14,7 +14,7 @@
  }*/
 
 var focusData = KIVA['timeline'];
-var vizWidth  = 700; 
+var vizWidth  = 640; 
 var barWidth  = vizWidth / focusData.length;
 var barHeight = 75;
 
