@@ -32,7 +32,7 @@ def cacheLoans(num_pages):
 
 def merge_dat2js(file_list, varname):
 	output = []
-	output.append('var ' + varname + '=[')
+	output.append('exports.' + varname + '=[')
 	num_files = len(file_list)
 	for index in range(0, num_files): 
 		print "Merging file %d" % index
@@ -47,6 +47,6 @@ def merge_dat2js(file_list, varname):
 	jsdata.writelines(output)
 	jsdata.close()
 
-num_pages = 250 
+num_pages = 5000; 
 file_list = cacheLoans(num_pages)
-merge_dat2js(file_list, 'LOANS')
+merge_dat2js(file_list, 'LOANS_1000_RAW')

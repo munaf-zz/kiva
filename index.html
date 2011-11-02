@@ -10,6 +10,8 @@
   <script type="text/javascript" src="js/lib/underscore.min.js"></script>
   <script type="text/javascript" src="js/lib/d3.js"></script>
   <script type="text/javascript" src="js/lib/polymaps.min.js"></script>
+  <script type="text/javascript" src="data/KIVADATA.js"></script>
+  <!--	<script type="text/javascript" src="data/kiva_data/LOANS_TIME.js"></script> -->
   <style type="text/css">
     html, body {
       background-color: #eee;
@@ -27,6 +29,11 @@
     div#context {
       width: 700px;
       height: 100px;
+    }
+    div#hero-unit {
+      height: 150px;
+      margin-bottom: 10px;
+      padding: 10px;
     }
     .compass .back{
       fill:#eee;
@@ -94,35 +101,36 @@
   <div class="topbar">
     <div class="fill">
       <div class="container">
-        <h2>Kiva Data Explorer</h2>
+        <h2 class="brand">Kiva Data Explorer</h2>
       </div>
     </div>
   </div>
 
   <div class="container">
-    <div class="content">
-      <div class="row">
-        <div class="span3">
-          <div class="alert-message block-message success">
-            <h5>Lending Partner</h5>
-            <div class="input">
-              <select class="chzn-select medium" name="sel-partner" id="sel-partner">
-                <option>First</option>
-                <option>Second</option>
-              </select>
-            </div>
-          </div>
-          <div class="alert-message block-message success">
-            <h5>Loan Range</h5>
-          </div>
-          <div class="alert-message block-message success">
-            <h5>Business Sector</h5>
+    <div class="hero-unit">
+      <h2>Hello, world.</h2>
+    </div>
+    <div class="row">
+      <div class="span4">
+        <div class="alert-message block-message success">
+          <h5>Lending Partner</h5>
+          <div class="input">
+            <select class="chzn-select medium" name="sel-partner" id="sel-partner">
+              <option>First</option>
+              <option>Second</option>
+            </select>
           </div>
         </div>
-        <div class="span12">
-          <div id="map"></div>
-          <div id="context"></div>
+        <div class="alert-message block-message success">
+          <h5>Loan Range</h5>
         </div>
+        <div class="alert-message block-message success">
+          <h5>Business Sector</h5>
+        </div>
+      </div>
+      <div class="span12">
+        <div id="map"></div>
+        <div id="context"></div>
       </div>
     </div>
   </div>
