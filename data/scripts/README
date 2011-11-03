@@ -1,0 +1,5 @@
+Please note:
+
+These scripts are not self-contained; they operated on large datasets which
+were too big to upload. Also, the functions were run piecemeal (they do not
+necessarily work together to accomplish a single task).

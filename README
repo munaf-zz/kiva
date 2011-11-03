@@ -1,8 +1,17 @@
-Kiva Data Explorer
+Kiva Explorer
 
+Munaf Assaf
 University of Michigan
 School of Information
 SI-649: Information Visualization
 Assignment 2
 
 This is a basic tool to visualize Kiva loan success rates across many variables.
+As of 11/2/2011 it's incomplete/buggy. 
+
+Instructions:
+Export or clone the source to a directory. From that directory, run:
+$ python SimpleHTTPServer 8888
+
+Then navigate to http://localhost:8888 to test. This is necessary because 
+the tool uses JSON callbacks.
