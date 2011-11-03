@@ -1,18 +1,19 @@
 $(document).ready(function() {
   // Populate partner combo box with partner names.
   function makeOptions() {
-    var pids = KIVA['pids'];
-    var partners = KIVA['partners'];
-    var options=""; 
+    var options="<option id='0' class='partner'>All</option>"; 
 
-    for (var i = 0; i < pids.length; i++) {
-      options += "<option class='partner' id='" + pids[i] + "'>" + 
-                 partners[i] + "</option>";
+    for (var i = 0; i < PIDS.length; i++) {
+      options += "<option class='partner' id='" + PIDS[i] + "'>" + 
+                 PARTNERS[i] + "</option>";
     }
-    $('select').html(options);
+    $('#partner').html(options);
+    $('#partner').change(function() {
+      filterByPartner(parseInt($('#partner option:selected').attr('id')));
+    });
   }
 
   // Apply chosen.css class
   makeOptions();
-  $('.chzn-select').chosen();
+  //$('.chzn-select').chosen();
 });

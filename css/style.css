@@ -1,0 +1,82 @@
+html, body {
+  background-color: #eee;
+}
+body {
+  padding-top: 60px;
+}
+.content {
+  padding-left: 30px;
+  max-height: 400px;
+}
+div#map {
+  height: 500px;
+}
+div#context {
+  width: 700px;
+  height: 100px;
+}
+div#hero-unit {
+  height: 150px;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+.compass .back{
+  fill:#eee;
+  fill-opacity:.8;
+}
+
+.compass .fore{
+  stroke:#999;
+  stroke-width:1.5px;
+}
+
+.compass rect .back .fore{
+  fill:#999;
+  fill-opacity:.3;
+  stroke:#eee;
+  stroke-width:1px;
+  shape-rendering:crispEdges;
+}
+
+.compass .direction{
+  fill:none;
+}
+
+.compass .chevron{
+  fill:none;
+  stroke:#999;
+  stroke-width:5px;
+}
+
+.compass .zoom .chevron{
+  stroke-width:4px;
+}
+
+.compass .active .chevron, .compass .chevron .active{
+  stroke:#fff;
+}
+
+.compass .active .active .direction{
+  fill:#999;
+}
+.layer path {
+  fill: #ccc;
+  fill-opacity: .85;
+  stroke: #012;
+}
+.topbar-inner .title {
+  /*display: block;*/
+  padding: 8px 15px 12px;
+  color: #ffffff;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 20px;
+  font-weight: 200;
+  line-height: 1;
+}
+.topbar-inner img {
+  height: 40px;
+}
+.context-area {
+  cursor: crosshair;
+}
+

@@ -40,7 +40,7 @@ var context = d3.select("#context")
 context.selectAll("rect")
   .data(focusData)
   .enter().append("svg:rect")
-    .attr("fill", "cornflowerblue")
+    .attr("fill", "gray")
     .attr("x", function(d, i) { return x(i) - 0.5; })
     .attr("y", function(d) { return barHeight - y(d) - 0.5; })
     .attr("width", barWidth)
@@ -65,20 +65,20 @@ var timefilter,
     count,
     selStart,
     pointerOffset,
-		numBarsSel, 
-    indexRange = []; 
+    numBarsSel;
 
 // Initializes context selection overlay.
 function startTimeSelect() {
-  console.log("starting time selector...");
+  //console.log("starting time selector...");
   if (timefilter) timefilter.remove();
   t0 = d3.svg.mouse(this);
   timefilter = context 
     .append("svg:rect")
       .style("cursor", "move")
-      .style("fill", "pink")
+      .style("fill", "cornflowerblue")
+      .style("stroke", "darkblue")
       .style("fill-opacity", .5)
-    .on("mousedown", grabTimeWindow);
+      .on("mousedown", grabTimeWindow);
   
   context.on("mousemove", scaleTimeSelect);
   d3.event.preventDefault(); 
@@ -99,15 +99,16 @@ function scaleTimeSelect() {
     .attr("width", maxx - minx + 1)
     .attr("height", barHeight);
 	numBarsSel = (timefilter.attr("width")/barWidth);
-  indexRange = [Math.round(timefilter.attr("x") / barWidth), 
+  TRANGE = [Math.round(timefilter.attr("x") / barWidth), 
     Math.round((timefilter.attr("x") / barWidth)+ numBarsSel)];
-	//console.log(indexRange);
+//  filterByDate(MONTHS[TRANGE[0]], MONTHS[TRANGE[1]], _(KIVA['loans']).clone());
 }
 
 // Stops selecting time window.
 function stopTimeSelect() {
   context.on("mousemove", null);
   context.on("mouseup", null);
+  filterByDate(MONTHS[TRANGE[0]], MONTHS[TRANGE[1]], _(KIVA['loans']).clone());
 }
 
 // ------------------------------------------------------------------------
@@ -132,9 +133,9 @@ function moveTimeWindow() {
   var x = d3.svg.mouse(this)[0] - pointerOffset;
   timefilter.attr("x", Math.max(0, 
     Math.min(x, vizWidth-timefilter.attr("width"))));
-  indexRange = [Math.round(timefilter.attr("x") / barWidth), 
-		Math.round((timefilter.attr("x") / barWidth)+ numBarsSel)];	
-  filterByDate(KIVA['months'][indexRange[0]], KIVA['months'][indexRange[1]], KIVA['loans']);
+  TRANGE = [Math.round(timefilter.attr("x") / barWidth), 
+    Math.round((timefilter.attr("x") / barWidth)+ numBarsSel)];	
+  filterByDate(MONTHS[TRANGE[0]], MONTHS[TRANGE[1]], _(KIVA['loans']).clone());
 }
 
 // Let go of time window. Enable drawing new time windows. 
@@ -145,5 +146,5 @@ function releaseTimeWindow() {
   timefilter.on("mouseout", null);
   context.on("mousedown", startTimeSelect);
   context.on("mouseup", stopTimeSelect);
-//  filterByDate(KIVA['months'][indexRange[0]], KIVA['months'][indexRange[1]], CURDATA);
+  //console.log(CURRENT);
 }
